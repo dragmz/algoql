@@ -1,0 +1,10 @@
+SELECT
+    txn.type,
+    txn.note AS Note,
+    txn.snd AS Sender
+FROM
+    block.txns AS txns
+WHERE
+    txns.txn.type = 'pay'
+    OR
+    txns.txn.type = 'appl';

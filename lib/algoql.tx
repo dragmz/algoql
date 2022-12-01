@@ -1,0 +1,64 @@
+Program:
+    statements+=Statement
+;
+
+Statement:
+    'SELECT' columns+=Column[','] 'FROM' tables+=Table[','] ('WHERE' filters+=Filter)* ';'
+;
+
+Table:
+    path=Path ('AS' alias=Alias)?
+;
+
+Column:
+    ref=Ref ('AS' alias=Alias)?
+;
+
+
+Alias:
+    ID | STRING
+;
+
+Path:
+    parts=ID ('.' parts=ID)*
+;
+
+Filter:
+    alts=Conditions ('OR' alts=Conditions)*
+;
+
+Conditions:
+    conds=Condition ('AND' conds=Condition)*
+;
+
+Group:
+    '(' filters+=Filter ')'
+;
+
+Condition:
+    (binop=BinOp | group=Group)
+;
+
+BinOp:
+    (a=Ref operator=Operator b=Value)
+;
+
+Ref:
+    (op=Op | path=Path)
+;
+
+Op:
+    name=ID '(' args+=Arg[','] ')'
+;
+
+Arg:
+    Path | Value
+;
+
+Value:
+    STRING | INT | 'NULL'
+;
+
+Operator:
+    '=' | '!=' | 'IS NOT' | 'IS'
+;
