@@ -1,4 +1,6 @@
 # algoql
+Algorand streaming Query Language
+
 ## Usage
 ````commandline
 python main.py <query>
