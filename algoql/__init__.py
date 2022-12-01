@@ -1,0 +1,1 @@
+from .algoql import execute
