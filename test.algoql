@@ -1,7 +1,7 @@
 SELECT
-    txn.type,
-    txn.note AS Note,
-    txn.snd AS Sender
+    txns.txn.type,
+    txns.txn.note AS Note,
+    txns.txn.snd AS Sender
 FROM
     block.txns AS txns
 WHERE
