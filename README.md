@@ -1,3 +1,9 @@
+# algoql
+## Usage
+````commandline
+python main.py <query>
+````
+
 ### Get current block round
 ``` sql
 SELECT b.rnd FROM block AS b;
