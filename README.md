@@ -1,10 +1,16 @@
 # algoql
 Algorand streaming Query Language
 
+## Installation
+
+```commandline
+pip install algoql
+```
+
 ## Usage
-````commandline
-python main.py <query>
-````
+```commandline
+algoql query <query text>
+```
 
 ### Get current block round
 ``` sql
