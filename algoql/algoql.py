@@ -1,15 +1,14 @@
 from textx import metamodel_from_file
 from .algorand import Algorand
-from os import path
 from typing import Dict
 import base64
+from importlib.resources import files, as_file
+import algoql
+
+mm = metamodel_from_file(files(algoql).joinpath("algoql.tx"))
+
 
 def execute(query: str):
-    basepath = path.dirname(__file__)
-    filepath = path.abspath(path.join(basepath, "algoql.tx"))
-
-    mm = metamodel_from_file(filepath)
-
     a = Algorand()
     m = mm.model_from_str(query)
 
@@ -26,7 +25,6 @@ def execute(query: str):
             name = path.parts[-1]
 
         return name
-
 
     def resolve_op(data, op):
         if op.name == 'BASE64DECODE':
@@ -71,6 +69,7 @@ def execute(query: str):
                     return True
 
         return False
+
     def test_condition(data: Dict, cond):
         def resolve_test_value(value):
             if value == 'NULL':
